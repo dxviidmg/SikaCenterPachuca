@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+
+{%load static%}
+
+{%block content%}
+
+    <div class="row">
+    	<div class="col-sm-3" style="background-color:yellow;">
+      		<h2>Categorias</h2>
+			{%for categoria in categorias%}
+				1{{categoria.nombre}}<br>
+			{%empty%}
+				No hay categorias
+			{%endfor%}
+		</div>
+		<div class="col-sm-9" style="background-color:red;">
+			<h2>Productos</h2>
+     		<div class="container-fluid">
+      			<div class="row">
+
+				{%for producto in productos%}
+					<div class="col-sm-4" style="background-color:red;">
+						<img src="{{producto.imagen.url}}" height="100px">
+						{{producto.nombre}}
+						</div>
+				{%endfor%}
+				</div>
+      		</div>
+		</div>      
+    </div>
+
+{%endblock content%}
