@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from django.views.generic import View
-#from carrito.forms import CartAddProductForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class ProductoList(View):
 	def get(self, request, slug=None):
@@ -9,13 +9,21 @@ class ProductoList(View):
 
 		if slug:
 			categoria = Categoria.objects.get(slug=slug)
-			productos = Producto.objects.all().filter(categoria=categoria)
+			productos_list = Producto.objects.all().filter(categoria=categoria).order_by('?')
 		else:
-			productos = Producto.objects.all()
+			productos_list = Producto.objects.all()
 
 		categorias = Categoria.objects.all()
-		print(categorias)
-#		form = CartAddProductForm()
+
+		paginator = Paginator(productos_list, 32)
+		page = request.GET.get('page')
+		try:
+			productos = paginator.page(page)
+		except PageNotAnInteger:
+			productos = paginator.page(1)
+		except EmptyPage:
+			productos = paginator.page(paginator.num_pages)
+
 		context = {
 		'productos': productos,
 		'categorias': categorias,
@@ -23,3 +31,5 @@ class ProductoList(View):
 #		'form':  form,
 		}
 		return render(request, template_name, context)
+
+
