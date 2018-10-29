@@ -13,13 +13,17 @@
 }
 
 .info{
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-top: 25px;
+	padding-bottom: 25px;
 	font-size: 17px;
 	text-align: justify;
 	font-family: sans-serif;
 	font-size: 150;
 	font-style: italic;
+}
+
+.info h2, .info h3 {
+
 }
 
 h2, h3 {
@@ -50,4 +54,16 @@ a:hover {
 
 .contorno {
 	border-color: #DFD9D9;
+}
+
+.page-link{
+	background-color: #F5B325;
+	border-color: black;
+	color: black;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    background-color: #c48909;
+    border-color: black;
 }
